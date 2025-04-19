@@ -92,7 +92,8 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
     }
     protected void SetDefaultColor()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.BackgroundColor = ConsoleColor.Black;
     }
 
     public void Dispose()

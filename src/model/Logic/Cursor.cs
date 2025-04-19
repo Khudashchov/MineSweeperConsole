@@ -1,7 +1,7 @@
 public class Cursor
 {
     private bool _IsDisposed = false;
-    
+
     public void SetCursorCenter(int top, int width, string item)
     {
         СomponentsOfPage name = new СomponentsOfPage();
@@ -11,7 +11,6 @@ public class Cursor
         name.Dispose();
         
     }
-
     public void Dispose()
     {
         Dispose(true);
