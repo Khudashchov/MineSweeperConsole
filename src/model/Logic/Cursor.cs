@@ -1,11 +1,12 @@
 public class Cursor
 {
     private bool _IsDisposed = false;
-    public void SetCursorCenter(int top)
+    
+    public void SetCursorCenter(int top, int width, string item)
     {
-        MenuComponents name = new MenuComponents();
+        СomponentsOfPage name = new СomponentsOfPage();
 
-        Console.SetCursorPosition((Console.WindowWidth / 2) - (name.GetNameLength() / 2), top);
+        Console.SetCursorPosition((width / 2) - (item.Length / 2), top);
 
         name.Dispose();
         

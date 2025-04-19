@@ -1,5 +1,5 @@
 using Model.Interfaces;
-public class RoundGenerator : IRoundGenerator
+public class RoundLogic : IRoundLogic
 {
     private int[,] _Field = new int[64,48];
 
