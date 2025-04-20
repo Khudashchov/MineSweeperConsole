@@ -3,7 +3,6 @@ using Model.Interfaces;
 public class СomponentsOfPage : IСomponentsOfPage, IDisposable
 {
     private bool _IsDisposed = false;
-    protected Cursor _cursor = new Cursor();
     private string[] _mineSweeperName = 
     {
         "███╗░░░███╗██╗███╗░░██╗███████╗░██████╗░██╗░░░░░░░██╗███████╗███████╗██████╗░███████╗██████╗░", // 93 symbols
@@ -16,7 +15,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
 
     public void SetHeader()
     {
-        SetDefaultColor();
+        Cursor.SetDefaultColor();
         SetMenuName();
         SetHorizontalBorder();
     }
@@ -82,20 +81,14 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
         for(int i = 0; i < _mineSweeperName.Length; i++)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            _cursor.SetCursorCenter(Console.CursorTop, Console.WindowWidth, _mineSweeperName[0]);
+            Cursor.SetCursorCenter(Console.CursorTop, Console.WindowWidth, _mineSweeperName[0]);
 
             Console.Write($" {_mineSweeperName[i]}");
 
-            SetDefaultColor();
+            Cursor.SetDefaultColor();
             Console.WriteLine();
         }
     }
-    protected void SetDefaultColor()
-    {
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.BackgroundColor = ConsoleColor.Black;
-    }
-
     public void Dispose()
     {
         Dispose(true);
@@ -110,7 +103,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
 
             if(disposing)
             {
-                _cursor.Dispose();
+                
             }
         }
     }

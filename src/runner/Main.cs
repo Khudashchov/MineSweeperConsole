@@ -10,7 +10,9 @@ Console.SetWindowSize(207,54);
 Console.SetBufferSize(210,54);
 #pragma warning restore CA1416
 
-
 PageMainMenu comps = new PageMainMenu();
 
-comps.GenerateMenu();
+while(ProgramStatus.IsRunning)
+{
+    comps.GenerateMenu();
+}
