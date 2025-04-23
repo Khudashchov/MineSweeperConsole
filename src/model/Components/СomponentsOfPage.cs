@@ -46,10 +46,12 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
     private void SetVerticalBorder(string side, int CurrentTop)
     {
         int Cursor = 0;
+
         side = side.ToUpper();
+
         if(side == "RIGHT")
         {
-            Cursor = Console.WindowWidth + 1;
+            Cursor = Console.WindowWidth - 1;
         } else if(side == "LEFT")
         {
             Cursor = Console.WindowLeft;
@@ -63,17 +65,19 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
         {
             Console.SetCursorPosition(Cursor, i);
             Console.Write("|");
+            Console.WriteLine();
         }
     }
 
     private void SetHorizontalBorder()
     {
         Console.Write("+");
-        for(int i = 0; i < Console.WindowWidth; i++)
+        for(int i = 0; i < Console.WindowWidth - 2; i++)
         {
             Console.Write("-");
         }
-        Console.WriteLine("+");
+        Console.Write("+");
+        Console.WriteLine();
     }
 
     private void SetMenuName()

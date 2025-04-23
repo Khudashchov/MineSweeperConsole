@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Model.Interfaces;
 
 public class MenuLogic : IMenuLogic

@@ -5,6 +5,7 @@ public class ExitButton : Button
         ProgramStatus.IsMenuRunning = false;
 
         Console.Clear();
+        
         ProgramStatus.IsRunning = false;
 
     }
