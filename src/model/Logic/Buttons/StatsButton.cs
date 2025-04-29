@@ -1,8 +1,10 @@
+namespace Model.Logic.Buttons;
+
 public class StatsButton : Button
 {
     public override void Action()
     {
-        ProgramStatus.IsMenuRunning = false;
+        ProgramStatus.DisableMenu();
         
         Console.WriteLine("Empty here.");
     }

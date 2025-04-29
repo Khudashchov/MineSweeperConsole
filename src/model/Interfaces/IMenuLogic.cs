@@ -1,3 +1,4 @@
+using Model.Logic.Buttons;
 namespace Model.Interfaces;
 
 public interface IMenuLogic

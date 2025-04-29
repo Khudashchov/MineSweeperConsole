@@ -1,3 +1,5 @@
+using Model.Logic.Buttons;
+
 public class ComponentsOfMainMenuPage : СomponentsOfPage
 {
     private MenuLogic _menuLogic = new MenuLogic();
@@ -8,7 +10,7 @@ public class ComponentsOfMainMenuPage : СomponentsOfPage
         {"STATS", new StatsButton()},
         {"EXIT", new ExitButton()}
     };
-    public override void SetBodyComponents()
+    protected override void SetBodyComponents()
     {
         _menuLogic.SelectOptionLogic(Functions);
     }

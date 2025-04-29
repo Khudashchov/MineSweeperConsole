@@ -1,4 +1,5 @@
 using Model.Interfaces;
+using Model.Logic.Buttons;
 
 public class MenuLogic : IMenuLogic
 {
@@ -28,9 +29,9 @@ public class MenuLogic : IMenuLogic
     }
 
     
-    private void DrawMenu(Dictionary<string, Button> Functions, List<string> keys)
+    private void DrawTasks(Dictionary<string, Button> functions, List<string> keys)
     {
-        for(int i = 0; i < Functions.Count; i++)
+        for(int i = 0; i < functions.Count; i++)
         {
             if(i == _task)
             {
@@ -45,18 +46,18 @@ public class MenuLogic : IMenuLogic
         }
     }
 
-    public void SelectOptionLogic(Dictionary<string, Button> Functions)
+    public void SelectOptionLogic(Dictionary<string, Button> functions)
     {
-        ProgramStatus.IsMenuRunning = true;
+        ProgramStatus.EnableMenu();
         Console.CursorVisible = false;
 
-        var keys = new List<string>(Functions.Keys);
-        _taskMaxValue = Convert.ToInt16(Functions.Count - 1);
+        var keys = new List<string>(functions.Keys);
+        _taskMaxValue = Convert.ToInt16(functions.Count - 1);
         _task = 0;
 
-        while(ProgramStatus.IsMenuRunning)
+        while(ProgramStatus.GetMenuStatus())
         {
-            DrawMenu(Functions, keys);
+            DrawTasks(functions, keys);
 
             Console.SetCursorPosition(Console.CursorLeft, _cursorCurrentPos);
 
@@ -69,7 +70,7 @@ public class MenuLogic : IMenuLogic
                     _task++;
                     break;
                 case ConsoleKey.Enter:
-                    Functions.TryGetValue(keys[_task], out Button button);
+                    functions.TryGetValue(keys[_task], out Button button);
                     button.Action();
                     break;
             }

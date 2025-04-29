@@ -1,5 +1,6 @@
 using Model.Interfaces;
 
+namespace Model.Logic.Buttons;
 public class Button : IButton
 {
     public virtual void Action()

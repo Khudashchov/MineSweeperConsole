@@ -7,13 +7,16 @@
 
 
 #pragma warning disable CA1416
-Console.SetWindowSize(209, 54);
-Console.SetBufferSize(209, 55);
+Console.SetWindowSize(200, 50);
+Console.SetBufferSize(200, 50);
+
+// Console.WriteLine(Console.LargestWindowHeight);
+// Console.WriteLine(Console.LargestWindowWidth);
 #pragma warning restore CA1416
 
 PageMainMenu comps = new PageMainMenu();
 
-while(ProgramStatus.IsRunning)
+while(ProgramStatus.GetStatus())
 {
     comps.GenerateMenu();
 }

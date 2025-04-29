@@ -1,12 +1,14 @@
+namespace Model.Logic.Buttons;
+
 public class ExitButton : Button
 {
     public override void Action()
     {
-        ProgramStatus.IsMenuRunning = false;
+        ProgramStatus.DisableMenu();
 
         Console.Clear();
         
-        ProgramStatus.IsRunning = false;
+        ProgramStatus.CloseProgram();
 
     }
 }

@@ -26,7 +26,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
         SetBodyComponents();
     }
 
-    public virtual void SetBodyComponents()
+    protected virtual void SetBodyComponents()
     {   
         Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight / 2);
         Console.Write("This is empty page!");
@@ -43,7 +43,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
         SetHorizontalBorder();
     }
 
-    private void SetVerticalBorder(string side, int CurrentTop)
+    private void SetVerticalBorder(string side, int currentTop)
     {
         int Cursor = 0;
 
@@ -61,7 +61,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
             return;
         }
 
-        for(int i = CurrentTop; i < Console.WindowHeight; i++)
+        for(int i = currentTop; i < Console.WindowHeight; i++)
         {
             Console.SetCursorPosition(Cursor, i);
             Console.Write("|");

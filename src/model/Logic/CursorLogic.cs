@@ -1,10 +1,10 @@
 public static class Cursor
 {
-    public static void SetCursorCenter(int top, int width, string item)
+    public static void SetCursorCenter(int top, int width, string value)
     {
         СomponentsOfPage name = new СomponentsOfPage();
 
-        Console.SetCursorPosition((width / 2) - (item.Length / 2), top);
+        Console.SetCursorPosition((width / 2) - (value.Length / 2), top);
 
         name.Dispose();
         

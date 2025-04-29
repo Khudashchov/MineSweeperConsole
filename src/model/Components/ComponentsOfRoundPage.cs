@@ -1,6 +1,6 @@
 public class ComponentOfRoundPage : СomponentsOfPage
 {
-    public override void SetBodyComponents()
+    protected override void SetBodyComponents()
     {
         Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight / 2);
         Console.Write("This is empty page, but it`s Round Page !");
