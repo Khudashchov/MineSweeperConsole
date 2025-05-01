@@ -1,9 +1,11 @@
 # MineSweeperConsole
 
-4/23/2025 - Application works only in FullScreen mode 
-{
-    1 - Open console
-    2 - Press F11
-    3 - Clear console (cls command)
-    4 - Start MineSweeperConsole (dotnet run)
-}
+**Date:** 4/23/2025  
+**Note:** Application works only in Full Screen mode.
+
+## Instruction
+
+1. Open the console.
+2. Press `F11` to enter Full Screen mode.
+3. Clear the console using the `cls` command.
+4. Start MineSweeperConsole by running the command:
