@@ -1,6 +1,6 @@
 using Model.Logic.Buttons;
 
-public class ComponentsOfMainMenuPage : СomponentsOfPage
+public class ComponentsOfMenuPage : ComponentsOfPage
 {
     private MenuLogic _menuLogic = new MenuLogic();
     

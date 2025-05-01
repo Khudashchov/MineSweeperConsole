@@ -1,6 +1,8 @@
-public class PageMainMenu : ComponentsOfMainMenuPage
+using Model.Interfaces;
+
+public class PageMainMenu : ComponentsOfMenuPage, IPage
 {
-    public void GenerateMenu()
+        public void Generate()
     {
         Console.Clear();
         SetHeader();

@@ -6,8 +6,8 @@ public class PlayButton : Button
     public override void Action()
     {
         ProgramStatus.DisableMenu();
-        
-        Round.GenerateRound();
-        Console.ReadLine();
+        ProgramStatus.EnableGame();
+
+        Round.Generate();
     }
 }

@@ -1,5 +1,6 @@
 namespace Model.Interfaces;
-public interface IСomponentsOfPage
+
+public interface IComponentsOfPage
 {
     void SetHeader();
     void SetBody();

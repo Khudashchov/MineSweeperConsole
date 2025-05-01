@@ -1,6 +1,6 @@
 using Model.Interfaces;
 
-public class PageRound : ComponentsOfRoundPage, IPage
+public class PageStats : ComponentsOfStatsPage, IPage
 {
     public void Generate()
     {

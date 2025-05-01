@@ -1,6 +1,6 @@
 using Model.Interfaces;
 
-public class СomponentsOfPage : IСomponentsOfPage, IDisposable
+public class ComponentsOfPage : IComponentsOfPage, IDisposable
 {
     private bool _IsDisposed = false;
     private string[] _mineSweeperName = 
@@ -52,7 +52,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
         if(side == "RIGHT")
         {
             Cursor = Console.WindowWidth - 1;
-        } else if(side == "LEFT")
+        } else if(side == "LEFT")   
         {
             Cursor = Console.WindowLeft;
         } else 
@@ -87,10 +87,9 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
             Console.ForegroundColor = ConsoleColor.Magenta;
             Cursor.SetCursorCenter(Console.CursorTop, Console.WindowWidth, _mineSweeperName[0]);
 
-            Console.Write($" {_mineSweeperName[i]}");
+            Console.WriteLine($" {_mineSweeperName[i]}");
 
             Cursor.SetDefaultColor();
-            Console.WriteLine();
         }
     }
     public void Dispose()
@@ -112,7 +111,7 @@ public class СomponentsOfPage : IСomponentsOfPage, IDisposable
         }
     }
 
-    ~СomponentsOfPage()
+    ~ComponentsOfPage()
     {
         Dispose(false);
     }

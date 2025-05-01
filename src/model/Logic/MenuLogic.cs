@@ -27,20 +27,23 @@ public class MenuLogic : IMenuLogic
                 }
         }
     }
-
+    
     
     private void DrawTasks(Dictionary<string, Button> functions, List<string> keys)
     {
         for(int i = 0; i < functions.Count; i++)
         {
+            Cursor.SetCursorCenter(_cursorCentrePos + (i * 3), Console.WindowWidth - 2, keys[i]);
+
             if(i == _task)
             {
                 Console.BackgroundColor = ConsoleColor.DarkMagenta;
-                _cursorCurrentPos = Console.CursorTop;
+                Console.Write($">>> {keys[i]} <<<");
+            } else 
+            {
+                Console.Write($"    {keys[i]}    ");
             }
 
-            Cursor.SetCursorCenter(_cursorCentrePos + (i * 3), Console.WindowWidth - 2, keys[i]);
-            Console.Write(keys[i]);
             Cursor.SetDefaultColor();  
 
         }
