@@ -1,4 +1,6 @@
-using Model.Interfaces;
+using MineSweeper.Model.Interfaces;
+
+namespace MineSweeper.Model.Logic;
 
 public class RoundLogic : IRoundLogic
 {

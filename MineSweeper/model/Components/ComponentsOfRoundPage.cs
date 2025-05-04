@@ -1,3 +1,7 @@
+using MineSweeper.Model.Logic;
+
+namespace MineSweeper.Model.Components;
+
 public class ComponentsOfRoundPage : ComponentsOfPage
 {
     protected override void SetBodyComponents()

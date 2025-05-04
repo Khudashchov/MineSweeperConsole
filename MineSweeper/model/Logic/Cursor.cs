@@ -1,3 +1,7 @@
+using MineSweeper.Model.Components;
+
+namespace MineSweeper.Model.Logic;
+
 public static class Cursor
 {
     public static void SetCursorCenter(int top, int width, string value)

@@ -1,6 +1,8 @@
-namespace Model.Logic.Buttons;
+using MineSweeper.Model.Abstracts;
 
-public class ExitButton : Button
+namespace MineSweeper.Model.Logic.Buttons;
+
+public class ExitButton : ButtonBase
 {
     public override void Action()
     {

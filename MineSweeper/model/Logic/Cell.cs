@@ -1,3 +1,5 @@
+
+
 public class Cell
 {
     private bool _opened = false;

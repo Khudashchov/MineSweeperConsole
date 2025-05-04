@@ -1,3 +1,5 @@
+namespace MineSweeper.Model.Components;
+
 public class ComponentsOfStatsPage : ComponentsOfPage
 {
     protected override void SetBodyComponents()

@@ -1,10 +1,13 @@
-using Model.Logic.Buttons;
+using MineSweeper.Model.Logic.Buttons;
+using MineSweeper.Model.Abstracts;
+
+namespace MineSweeper.Model.Components;
 
 public class ComponentsOfMenuPage : ComponentsOfPage
 {
     private MenuLogic _menuLogic = new MenuLogic();
     
-    private Dictionary<string, Button> Functions = new Dictionary<string, Button>
+    private Dictionary<string, ButtonBase> Functions = new Dictionary<string, ButtonBase>
     {
         {"PLAY", new PlayButton()},
         {"STATS", new StatsButton()},
@@ -12,6 +15,6 @@ public class ComponentsOfMenuPage : ComponentsOfPage
     };
     protected override void SetBodyComponents()
     {
-        _menuLogic.SelectOptionLogic(Functions);
+        _menuLogic.SelectOption(Functions);
     }
 }

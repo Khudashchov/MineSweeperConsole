@@ -1,4 +1,4 @@
-namespace Model.Interfaces;
+namespace MineSweeper.Model.Interfaces;
 
 public interface IComponentsOfPage
 {
