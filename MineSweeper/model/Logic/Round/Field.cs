@@ -106,7 +106,6 @@ public class Field
             for (int j = 0; j < _field.GetLength(1); j++)
             {
                 _field[i, j] = new Cell(); 
-                _field[i, j].CellValue = 1;
             }
         }
     }

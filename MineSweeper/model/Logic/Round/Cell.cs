@@ -34,21 +34,24 @@ public class Cell
     public bool IsMine() => _mine;
 
     public bool IsEmpty() => _cellValue == 0 && !_mine;
-    
+
     public void PrintCell()
     {
         if(IsOpen())
         {
             if(IsMine())
             {
-                Console.Write((char)CellValue);
+                Console.Write('#');
             } else if (!IsEmpty())
             {
                 Console.Write(CellValue);
+            } else
+            {
+                Console.Write(' ');
             }
         } else
         {
-            Console.Write(" ");
+            Console.Write(' ');
         }
     }
 }
