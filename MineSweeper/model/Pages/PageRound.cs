@@ -1,9 +1,6 @@
 using MineSweeper.Model.Abstracts;
-using MineSweeper.Model.Components;
+using MineSweeper.Model.Pages.Components;
 
 namespace MineSweeper.Model.Pages;
 
-public class PageRound : PageBase<ComponentsOfRoundPage>
-{
-    
-}
+public class PageRound : PageBase<ComponentsOfRoundPage> { }

@@ -1,7 +1,7 @@
 using MineSweeper.Model.Interfaces;
 using MineSweeper.Model.Logic;
 
-namespace MineSweeper.Model.Components;
+namespace MineSweeper.Model.Pages.Components;
 
 public class ComponentsOfPage : IComponentsOfPage, IDisposable
 {

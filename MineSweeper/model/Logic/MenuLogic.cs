@@ -5,7 +5,6 @@ using MineSweeper.Model.Logic;
 public class MenuLogic : IMenuLogic
 {
     private int _cursorCentrePos = Console.WindowHeight / 2;
-    private int _cursorCurrentPos;
     private short _taskMaxValue;
     private short _taskValue;
     private short _task
@@ -63,7 +62,7 @@ public class MenuLogic : IMenuLogic
         {
             DrawTasks(functions, keys);
 
-            Console.SetCursorPosition(Console.CursorLeft, _cursorCurrentPos);
+            Console.SetCursorPosition(Console.CursorLeft, 0);
 
             switch(Console.ReadKey(true).Key)
             {

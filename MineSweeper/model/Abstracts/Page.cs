@@ -1,4 +1,4 @@
-using MineSweeper.Model.Components;
+using MineSweeper.Model.Pages.Components;
 
 namespace MineSweeper.Model.Abstracts;
 

@@ -1,7 +1,7 @@
 using MineSweeper.Model.Logic.Buttons;
 using MineSweeper.Model.Abstracts;
 
-namespace MineSweeper.Model.Components;
+namespace MineSweeper.Model.Pages.Components;
 
 public class ComponentsOfMenuPage : ComponentsOfPage
 {

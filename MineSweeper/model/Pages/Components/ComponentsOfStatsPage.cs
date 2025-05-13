@@ -1,4 +1,4 @@
-namespace MineSweeper.Model.Components;
+namespace MineSweeper.Model.Pages.Components;
 
 public class ComponentsOfStatsPage : ComponentsOfPage
 {

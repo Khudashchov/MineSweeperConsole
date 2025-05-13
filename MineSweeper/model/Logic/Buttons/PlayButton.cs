@@ -1,5 +1,5 @@
 using MineSweeper.Model.Abstracts;
-using MineSweeper.Model.Components;
+using MineSweeper.Model.Pages.Components;
 using MineSweeper.Model.Pages;
 
 namespace MineSweeper.Model.Logic.Buttons;
