@@ -42,12 +42,12 @@ public class Cell
             if(IsMine())
             {
                 Console.Write('#');
-            } else if (!IsEmpty())
-            {
-                Console.Write(CellValue);
-            } else
+            } else if (IsEmpty())
             {
                 Console.Write(' ');
+            } else
+            {
+                Console.Write(CellValue);
             }
         } else
         {

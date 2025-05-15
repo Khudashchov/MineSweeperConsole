@@ -12,7 +12,7 @@ public class ComponentsOfRoundPage : ComponentsOfPage
     // };
     protected override void SetBodyComponents()
     {
-        RoundLogic logic = new RoundLogic(1500);
+        RoundLogic logic = new RoundLogic(158);
         logic.Generate();
         Console.SetCursorPosition(Console.WindowLeft, Console.WindowHeight - 1); 
     }

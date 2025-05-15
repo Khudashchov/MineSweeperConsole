@@ -1,18 +1,16 @@
-using MineSweeper.Model.Abstracts;
+using MineSweeper.Model.Interfaces;
 using MineSweeper.Model.Pages.Components;
 using MineSweeper.Model.Pages;
 
 namespace MineSweeper.Model.Logic.Buttons;
 
-public class StatsButton : ButtonBase
+public class StatsButton : IButton
 {
     PageStats Stats = new PageStats();
     ComponentsOfStatsPage Components = new ComponentsOfStatsPage();
 
-    public override void Action()
+    public void Action()
     {
-        ProgramStatus.DisableMenu();
-
         Stats.Generate(Components);
         Console.ReadLine();
     }

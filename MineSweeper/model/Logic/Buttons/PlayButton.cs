@@ -1,16 +1,15 @@
-using MineSweeper.Model.Abstracts;
+using MineSweeper.Model.Interfaces;
 using MineSweeper.Model.Pages.Components;
 using MineSweeper.Model.Pages;
 
 namespace MineSweeper.Model.Logic.Buttons;
 
-public class PlayButton : ButtonBase
+public class PlayButton : IButton
 {
     PageRound Round = new PageRound();
     ComponentsOfRoundPage Components = new ComponentsOfRoundPage();
-    public override void Action()
+    public void Action()
     {
-        ProgramStatus.DisableMenu();
         ProgramStatus.EnableGame();
 
         Round.Generate(Components);

@@ -1,4 +1,3 @@
-using MineSweeper.Model.Abstracts;
 using MineSweeper.Model.Interfaces;
 using MineSweeper.Model.Logic;
 
@@ -29,7 +28,7 @@ public class MenuLogic : IMenuLogic
     }
     
     
-    private void DrawTasks(Dictionary<string, ButtonBase> functions, List<string> keys)
+    private void DrawTasks(Dictionary<string, IButton> functions, List<string> keys)
     {
         for(int i = 0; i < functions.Count; i++)
         {
@@ -49,7 +48,7 @@ public class MenuLogic : IMenuLogic
         }
     }
 
-    public void SelectOption(Dictionary<string, ButtonBase> functions)
+    public IButton SelectOption(Dictionary<string, IButton> functions)
     {
         ProgramStatus.EnableMenu();
         Console.CursorVisible = false;
@@ -73,10 +72,16 @@ public class MenuLogic : IMenuLogic
                     _task++;
                     break;
                 case ConsoleKey.Enter:
-                    functions.TryGetValue(keys[_task], out ButtonBase button);
-                    button.Action();
+                    ProgramStatus.DisableMenu();
                     break;
             }
         }
+        #pragma warning disable CS8600
+        #pragma warning disable CS8603
+        functions.TryGetValue(keys[_task], out IButton button);
+
+        return button;
+        #pragma warning restore CS8600
+        #pragma warning restore CS8603
     }
 }

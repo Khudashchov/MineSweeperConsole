@@ -1,73 +1,99 @@
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+
 namespace MineSweeper.Model.Logic.Round;
 
 public class Field
 {
-    private Cell[,] _field = new Cell[33,48];
-    private int _currentX;
-    private int _currentY;
+    private Cell[,] _field = new Cell[32, 48];
+    private Queue<(int, int)> emptyCells = new Queue<(int, int)>();
+    private int _currentLeft;
+    private int _currentTop;
     private int StartX = (Console.WindowWidth - 48) /2;
-    private int StartY = (Console.WindowHeight- 32) / 2;
-
-    private int CurrentX{
+    private int StartY = (Console.WindowHeight- 24) / 2;
+    private int _minesCount = 0;
+    private int _currentOpened = 0;
+    private string[] _winMessage = {
+        "██╗    ██╗██╗███╗   ██╗██╗",
+        "██║    ██║██║████╗  ██║██║",
+        "██║ █╗ ██║██║██╔██╗ ██║██║",
+        "██║███╗██║██║██║╚██╗██║╚═╝",
+        "╚███╔███╔╝██║██║ ╚████║██╗",
+        " ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝"
+    };
+    private string[] _lossMessage = {
+        "██╗      ██████╗ ███████╗███████╗██╗",
+        "██║     ██╔═══██╗██╔════╝██╔════╝██║",
+        "██║     ██║   ██║███████╗███████╗██║",
+        "██║     ██║   ██║╚════██║╚════██║╚═╝",
+        "███████╗╚██████╔╝███████║███████║██╗",
+        "╚══════╝ ╚═════╝ ╚══════╝╚══════╝╚═╝"
+    };
+    private int CurrentLeft{
         get
         {
-            return _currentX;
+            return _currentLeft;
         }
         set
         {
             if(value < 0)
             {
-                _currentX = 0;
+                _currentLeft = 0;
             } else if(value >= _field.GetLength(1))
             {
-                _currentX = _field.GetLength(1) - 1;
+                _currentLeft = _field.GetLength(1) - 1;
             } else
             {
-                _currentX = value;
+                _currentLeft = value;
             }
         }
     }
 
-    private int CurrentY{
+    private int CurrentTop{
         get
         {
-            return _currentY;
+            return _currentTop;
         }
         set
         {
             if(value < 0)
             {
-                _currentY = 0;
+                _currentTop = 0;
             } else if(value >= _field.GetLength(0))
             {
-                _currentY = _field.GetLength(0) - 1;
+                _currentTop = _field.GetLength(0) - 1;
             } else
             {
-                _currentY = value;
+                _currentTop = value;
             }
         }
     }
 
-    public Field()
+    public Field(int minesCount)
     {
+        _minesCount = minesCount;
         FieldGenerate();
+        SetFieldConfig();
+        DrawField();
     }
 
-    private void DrawField()
+    private void FieldGenerate()
     {
-        Console.SetCursorPosition(StartX, StartY);
-
-        for(int i = 0; i < _field.GetLength(0); i++)
+        for (int i = 0; i < _field.GetLength(0); i++)
         {
-            for(int j = 0; j < _field.GetLength(1); j++)
+            for (int j = 0; j < _field.GetLength(1); j++)
             {
-                DrawCell(i,j);
+                _field[i, j] = new Cell();
             }
-            
-            Console.SetCursorPosition(Console.CursorLeft - _field.GetLength(1), Console.CursorTop + 1);
         }
+    }
 
-        Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - _field.GetLength(0));
+    private void SetFieldConfig()
+    {
+        Console.CursorVisible = false;
+
+        CurrentLeft = 0;
+        CurrentTop = 0;
     }
 
     public void DrawCell(int Top, int Left)
@@ -99,53 +125,87 @@ public class Field
         Cursor.SetDefaultColor();
     }
 
-    private void FieldGenerate()
+    private void DrawField()
     {
-        for (int i = 0; i < _field.GetLength(0); i++)
+        Console.SetCursorPosition(StartX, StartY);
+
+        for(int i = 0; i < _field.GetLength(0); i++)
         {
-            for (int j = 0; j < _field.GetLength(1); j++)
+            for(int j = 0; j < _field.GetLength(1); j++)
             {
-                _field[i, j] = new Cell(); 
+                DrawCell(i,j);
             }
+            
+            Console.SetCursorPosition(Console.CursorLeft - _field.GetLength(1), Console.CursorTop + 1);
         }
+
+        Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - _field.GetLength(0));
     }
 
-    public void SelectCell()
+    private void DrawMessage(string[] message)
     {
-        Console.CursorVisible = false;
-
-        CurrentX = 0;
-        CurrentY = 0;
-
-        DrawField();
-
-        while(ProgramStatus.GetGameStatus())
+        for(int i =0; i < _field.GetLength(0); i++)
         {
-            switch(Console.ReadKey(true).Key)
+            for(int j = 0; j < _field.GetLength(1); j++)
             {
-                case ConsoleKey.UpArrow:
-                    DrawCell(CurrentY--, CurrentX);
-                    break;
-                case ConsoleKey.DownArrow:
-                    DrawCell(CurrentY++, CurrentX);
-                    break;
-                case ConsoleKey.RightArrow:
-                    DrawCell(CurrentY, CurrentX++);
-                    break;
-                case ConsoleKey.LeftArrow:
-                    DrawCell(CurrentY, CurrentX--);
-                    break;
-                case ConsoleKey.Enter:
-                    _field[CurrentY, CurrentX].Open();
-                    DrawCell(CurrentY, CurrentX);
-                    break;
-                case ConsoleKey.Escape:
-                    ProgramStatus.DisableGame();
-                    break;
+                Console.SetCursorPosition(StartX + j, StartY + i);
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.Write(' '); 
             }
-
-            DrawCell(CurrentY, CurrentX);
         }
+        for(int i = 0; i < message.Length; i++)
+        {
+            Console.SetCursorPosition((Console.WindowWidth / 2) - 17, (Console.WindowHeight / 2) + i);
+            Console.WriteLine(message[i]);
+        }
+
+    }
+    public void MakeMove()
+    {
+        if(WinCondition())
+        {
+            ProgramStatus.DisableGame();
+            DrawMessage(_winMessage);
+            Console.ReadLine();
+            Cursor.SetDefaultColor();
+            return;
+        }
+        switch(Console.ReadKey(true).Key)
+        {
+            case ConsoleKey.UpArrow:
+                DrawCell(CurrentTop--, CurrentLeft);
+                break;
+            case ConsoleKey.DownArrow:
+                DrawCell(CurrentTop++, CurrentLeft);
+                break;
+            case ConsoleKey.RightArrow:
+                DrawCell(CurrentTop, CurrentLeft++);
+                break;
+            case ConsoleKey.LeftArrow:
+                DrawCell(CurrentTop, CurrentLeft--);
+                break;
+            case ConsoleKey.Enter:
+                if(_field[CurrentTop, CurrentLeft].IsMine())
+                {
+                    ProgramStatus.DisableGame();
+                    _field[CurrentTop, CurrentLeft].Open();
+                    DrawCell(CurrentTop, CurrentLeft);
+                    DrawMessage(_lossMessage);
+                    Console.ReadLine();
+                    break;
+                }
+
+                emptyCells.Enqueue((CurrentTop, CurrentLeft));
+                Open();
+                
+
+                break;
+            case ConsoleKey.Escape:
+                ProgramStatus.DisableGame();
+                break;
+        }
+
+        DrawCell(CurrentTop, CurrentLeft);  
     }
 
     public void SetMines(Stack<(int, int)> mines)
@@ -157,12 +217,127 @@ public class Field
         }
     }
 
-    private bool IsSelected(int i, int j)
-    {
-        return CurrentX == j && CurrentY == i;
+    public void SetNumbers()
+    {   
+        for (int i = 0; i < _field.GetLength(0); i++)
+        {
+            for (int j = 0; j < _field.GetLength(1); j++)
+            {
+                if(!_field[i, j].IsMine())
+                {
+                    _field[i,j].CellValue = CountMinesCube(i, j);
+                } else
+                {
+                    continue;
+                }
+            }
+        }
     }
 
-    public int GetFieldY() => _field.GetLength(0);
+    private int CountMinesCube(int Y, int X)
+    {
+        int mines = 0;
 
-    public int GetFieldX() => _field.GetLength(1);
+        for (int i = Y - 1; i < Y + 2; i++)
+        {
+            for (int j = X - 1; j < X + 2; j++)
+            {
+                try
+                {
+                    if(_field[i, j].IsMine())
+                    {
+                        mines++;
+                    } else
+                    {
+                        continue;
+                    }
+                } catch (ArgumentOutOfRangeException)
+                {
+                    continue;
+                } catch (IndexOutOfRangeException)
+                {
+                    continue;
+                }
+            }
+        }
+
+        return mines;
+    }
+
+    private void Open()
+    {
+        while(emptyCells.Count > 0)
+        {
+            var coordinates = emptyCells.Dequeue();
+            if (_field[coordinates.Item1, coordinates.Item2].IsOpen())
+            {   
+                continue;
+            } else 
+            {
+                _field[coordinates.Item1, coordinates.Item2].Open();
+                ++_currentOpened;
+            }
+
+            DrawCell(coordinates.Item1, coordinates.Item2);
+            CheckArea(coordinates.Item1, coordinates.Item2);
+        }
+    }
+
+    private void CheckArea(int coordinatesTop, int coordinatesLeft)
+    {
+        for(int i = coordinatesTop - 1; i < coordinatesTop + 2; i++)
+        {
+            for(int j = coordinatesLeft - 1; j < coordinatesLeft + 2; j++)
+            {
+                TryEnqueue(i, j);
+            }
+        }
+    }
+
+    private void TryEnqueue(int i,  int j)
+    {
+        try
+        {
+            if(_field[i, j].IsOpen())
+            {
+                return;
+            } else if(_field[i, j].IsEmpty())
+            {
+                emptyCells.Enqueue((i, j));
+                DrawCell(i, j);
+            } else if(!_field[i, j].IsMine())
+            {
+                _field[i, j].Open();
+                ++_currentOpened;
+                DrawCell(i, j);
+            } else 
+            {
+                return;
+            }
+        } catch (ArgumentOutOfRangeException)
+        {
+            return;
+        } catch (IndexOutOfRangeException)
+        {
+            return;
+        }
+    }
+
+    private bool WinCondition()
+    {
+        return _currentOpened == (_field.GetLength(0) * _field.GetLength(1)) - _minesCount;
+    }
+    private bool IsSelected(int i, int j)
+    {
+        return CurrentLeft == j && CurrentTop == i;
+    }
+
+    public bool IsMine(int i, int j)
+    {
+        return _field[i,j].IsMine();
+    }
+
+    public int GetFieldHeight() => _field.GetLength(0);
+
+    public int GetFieldWidth() => _field.GetLength(1);
 }

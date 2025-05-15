@@ -1,16 +1,13 @@
-using MineSweeper.Model.Abstracts;
+using MineSweeper.Model.Interfaces;
 
 namespace MineSweeper.Model.Logic.Buttons;
 
-public class ExitButton : ButtonBase
+public class ExitButton : IButton
 {
-    public override void Action()
+    public void Action()
     {
-        ProgramStatus.DisableMenu();
-
         Console.Clear();
         
         ProgramStatus.CloseProgram();
-
     }
 }
