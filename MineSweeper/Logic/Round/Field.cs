@@ -167,7 +167,7 @@ public class Field
                 break;
             case ConsoleKey.Escape:
                 ProgramStatus.DisableGame();
-                break;
+                return GameState.Exit; 
         }
 
         DrawCell(CurrentTop, CurrentLeft);

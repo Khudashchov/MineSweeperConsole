@@ -2,6 +2,7 @@ using MineSweeper.Interfaces;
 using MineSweeper.Logic.Round;
 using MineSweeper.Status;
 using MineSweeper.Messages;
+using MineSweeper.Logic.Stats;
 
 namespace MineSweeper.Logic;
 
@@ -12,6 +13,7 @@ public class RoundLogic : IRoundLogic
     private Stack<(int, int)> _mines = new Stack<(int, int)>();
     private Random _random = new Random();
     private TimerLogic _timer = new TimerLogic();
+    private StatsLogic _statsLogic = new StatsLogic();
 
     public RoundLogic(int mineCount)
     {
@@ -27,19 +29,22 @@ public class RoundLogic : IRoundLogic
         while (ProgramStatus.GetGameStatus())
         {
             GameState state = _field.MakeMove();
-
-            if (state == GameState.Win)
+            
+            switch (state)
             {
-                DrawReport(Message.WinMessage);
-
-            }
-            else if (state == GameState.Loss)
-            {
-                DrawReport(Message.LossMessage);
-            }
-            else
-            {
-                continue;
+                case GameState.Win:
+                    DrawReport(Message.WinMessage);
+                    StatsRecord stats = new StatsRecord(_timer.GetElapsedSeconds());
+                    _statsLogic.SaveRoundStats(stats);
+                    break;
+                case GameState.Loss:
+                    DrawReport(Message.LossMessage);
+                    break;
+                case GameState.Exit:
+                    _timer.Stop();
+                    break;
+                default:
+                    continue;
             }
         }
     }
@@ -68,7 +73,7 @@ public class RoundLogic : IRoundLogic
     }
 
     private void DrawReport(string[] message)
-    { 
+    {
         ProgramStatus.DisableGame();
         _timer.Stop();
         Console.Clear();

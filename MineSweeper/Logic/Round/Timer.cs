@@ -1,4 +1,4 @@
-    namespace MineSweeper.Logic.Round;
+namespace MineSweeper.Logic.Round;
 
 public class TimerLogic
 {
@@ -24,6 +24,11 @@ public class TimerLogic
     {
         TimeSpan time = TimeSpan.FromSeconds(_seconds);
         return $"{time.Minutes:D2}:{time.Seconds:D2}";
+    }
+
+    public int GetElapsedSeconds()
+    {
+        return _seconds;
     }
 
     private void RunTimer()
