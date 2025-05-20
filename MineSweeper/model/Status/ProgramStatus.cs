@@ -1,8 +1,10 @@
+namespace MineSweeper.Model.Status;
+
 public static class ProgramStatus
 {
-    private static bool _isRunning {get; set;} = true;
-    private static bool _isMenuRunning {get; set;}
-    private static bool _isGameRunning {get; set;}
+    private static bool _isRunning { get; set; } = true;
+    private static bool _isMenuRunning { get; set; }
+    private static bool _isGameRunning { get; set; }
 
     public static void EnableMenu() => _isMenuRunning = true;
 

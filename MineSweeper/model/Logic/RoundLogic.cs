@@ -1,5 +1,7 @@
 using MineSweeper.Model.Interfaces;
 using MineSweeper.Model.Logic.Round;
+using MineSweeper.Model.Status;
+using MineSweeper.Model.Messages;
 
 namespace MineSweeper.Model.Logic;
 
@@ -17,11 +19,25 @@ public class RoundLogic : IRoundLogic
     }
 
     public void Generate()
-    {   
+    {
         GenerateFieldValues();
-        while(ProgramStatus.GetGameStatus())
+        while (ProgramStatus.GetGameStatus())
         {
-            _field.MakeMove();
+            GameState state = _field.MakeMove();
+
+            if (state == GameState.Win)
+            {
+                DrawReport(Message.WinMessage);
+
+            }
+            else if (state == GameState.Loss)
+            {
+                DrawReport(Message.LossMessage);
+            }
+            else
+            {
+                continue;
+            }
         }
     }
 
@@ -45,6 +61,15 @@ public class RoundLogic : IRoundLogic
     private void GenerateFieldValues()
     {
         _field.SetMines(GetMinePositions());
-        _field.SetNumbers();     
+        _field.SetNumbers();
+    }
+
+    private void DrawReport(string[] message)
+    { 
+        ProgramStatus.DisableGame();
+        Console.Clear();
+        Message.DrawMessage(message);
+        Console.ReadLine();
+        Cursor.SetDefaultColor();
     }
 }

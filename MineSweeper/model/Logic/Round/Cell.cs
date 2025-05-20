@@ -41,7 +41,7 @@ public class Cell
         {
             if(IsMine())
             {
-                Console.Write('#');
+                Console.Write((char)CellValue);
             } else if (IsEmpty())
             {
                 Console.Write(' ');

@@ -1,9 +1,11 @@
 using MineSweeper.Model.Logic.Buttons;
 using MineSweeper.Model.Interfaces;
+using MineSweeper.Model.Abstracts;
+using MineSweeper.Model.Logic;
 
 namespace MineSweeper.Model.Pages.Components;
 
-public class ComponentsOfMenuPage : ComponentsOfPage
+public class ComponentsOfMenuPage : ComponentsOfPageBase
 {
     private MenuLogic _menuLogic = new MenuLogic();
     
