@@ -14,6 +14,7 @@ public class RoundLogic : IRoundLogic
     private Random _random = new Random();
     private TimerLogic _timer = new TimerLogic();
     private StatsLogic _statsLogic = new StatsLogic();
+    private StatsRecord _currentStat;
 
     public RoundLogic(int mineCount)
     {
@@ -29,13 +30,12 @@ public class RoundLogic : IRoundLogic
         while (ProgramStatus.GetGameStatus())
         {
             GameState state = _field.MakeMove();
-            
+
             switch (state)
             {
                 case GameState.Win:
                     DrawReport(Message.WinMessage);
-                    StatsRecord stats = new StatsRecord(_timer.GetElapsedSeconds());
-                    _statsLogic.SaveRoundStats(stats);
+                    SaveStat();
                     break;
                 case GameState.Loss:
                     DrawReport(Message.LossMessage);
@@ -77,12 +77,20 @@ public class RoundLogic : IRoundLogic
         ProgramStatus.DisableGame();
         _timer.Stop();
         Console.Clear();
+
         Message.DrawMessage(message);
         Cursor.SetCursorCenter(15, Console.WindowWidth, "Time: " + _timer.GetElapsedTime());
         Console.WriteLine("Time: " + _timer.GetElapsedTime());
         Cursor.SetCursorCenter(20, Console.WindowWidth, "Press any key to continue ...");
         Console.WriteLine("Press any key to continue ...");
         Console.ReadLine();
+        
         Cursor.SetDefaultColor();
+    }
+
+    private void SaveStat()
+    { 
+        _currentStat = new StatsRecord(_timer.GetElapsedSeconds());
+        _statsLogic.SaveRoundStats(_currentStat);
     }
 }

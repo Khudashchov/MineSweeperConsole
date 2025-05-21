@@ -6,9 +6,11 @@ namespace MineSweeper.Pages.Components;
 
 public class ComponentsOfStatsPage : ComponentsOfPageBase
 {
-    private StatsLogic _statsLogic = new StatsLogic();
+    private StatsLogic _statsLogic;
+
     protected override void SetBodyComponents()
     {
+        _statsLogic = new StatsLogic();
         ShowStats();
     }
 
@@ -18,8 +20,8 @@ public class ComponentsOfStatsPage : ComponentsOfPageBase
 
         foreach (var stat in stats)
         {
-            Cursor.SetCursorCenter(Console.WindowHeight / 2 + i, Console.WindowWidth / 2, " ");
-            Console.WriteLine($"Seconds: {ConvertSeconds(stat.Seconds)}, Date: {stat.Date}");
+            Cursor.SetCursorCenter(Console.WindowHeight / 2 + i, Console.WindowWidth / 2, "     ");
+            Console.WriteLine($"{i + 1} | Time: {ConvertSeconds(stat.Seconds)}, Date: {stat.Date}");
             i++;
         }
     }
