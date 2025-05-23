@@ -1,20 +1,19 @@
 using MineSweeper.Abstracts;
 using MineSweeper.Logic;
 using MineSweeper.Logic.Stats;
+using MineSweeper.Interfaces;
 
 namespace MineSweeper.Pages.Components;
 
 public class ComponentsOfStatsPage : ComponentsOfPageBase
 {
-    private StatsLogic _statsLogic;
-
     protected override void SetBodyComponents()
     {
-        _statsLogic = new StatsLogic();
-        ShowStats();
+        IStatsLogic _statsLogic = new StatsLogic();
+        ShowStats(_statsLogic);
     }
 
-    private void ShowStats(int i = 0)
+    private void ShowStats(IStatsLogic _statsLogic, int i = 0)
     {
         List<StatsRecord> stats = _statsLogic.GetAllStats();
 

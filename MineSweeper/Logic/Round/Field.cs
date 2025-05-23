@@ -4,12 +4,12 @@ namespace MineSweeper.Logic.Round;
 
 public class Field
 {
-    private Cell[,] _field = new Cell[11, 22];
+    public const int FieldHeight = 12;
+    public const int FieldWidth = 22;
+    private Cell[,] _field = new Cell[FieldHeight, FieldWidth];
     private readonly Queue<(int, int)> emptyCells = new Queue<(int, int)>();
-    private int _currentLeft;
-    private int _currentTop;
-    // private int _startX = (Console.WindowWidth - 48) / 2;
-    // private int _startY = (Console.WindowHeight - 24) / 2;
+    private int _currentLeft = 0;
+    private int _currentTop = 0;
     private int _startY = Console.WindowHeight / 2;
     private int _startX = Console.WindowWidth / 2;
     private int _minesCount = 0;
@@ -59,7 +59,6 @@ public class Field
     {
         _minesCount = minesCount;
         FieldGenerate();
-        SetFieldConfig();
         DrawField();
     }
 
@@ -72,14 +71,6 @@ public class Field
                 _field[i, j] = new Cell();
             }
         }
-    }
-
-    private void SetFieldConfig()
-    {
-        Console.CursorVisible = false;
-
-        CurrentLeft = 0;
-        CurrentTop = 0;
     }
 
     public void DrawCell(int top, int left)
@@ -155,7 +146,6 @@ public class Field
             case ConsoleKey.Enter:
                 if (_field[CurrentTop, CurrentLeft].IsMine())
                 {
-                    ProgramStatus.DisableGame();
                     _field[CurrentTop, CurrentLeft].Open();
                     DrawCell(CurrentTop, CurrentLeft);
                     return GameState.Loss;
@@ -166,7 +156,6 @@ public class Field
 
                 break;
             case ConsoleKey.Escape:
-                ProgramStatus.DisableGame();
                 return GameState.Exit; 
         }
 
@@ -175,12 +164,12 @@ public class Field
         return GameState.InGame;
     }
 
-    public void SetMines(Stack<(int, int)> mines)
+    public void SetMines(Queue<Coordinates> mines)
     {
         while (mines.Count > 0)
         {
-            var mine = mines.Pop();
-            _field[mine.Item1, mine.Item2].SetMine();
+            var mine = mines.Dequeue();
+            _field[mine.Y, mine.X].SetMine();
         }
     }
 
@@ -308,13 +297,4 @@ public class Field
     {
         return CurrentLeft == j && CurrentTop == i;
     }
-
-    public bool IsMine(int i, int j)
-    {
-        return _field[i, j].IsMine();
-    }
-
-    public int GetFieldHeight() => _field.GetLength(0);
-
-    public int GetFieldWidth() => _field.GetLength(1);
 }

@@ -1,5 +1,6 @@
 using MineSweeper.Logic;
 using MineSweeper.Abstracts;
+using MineSweeper.Interfaces;
 
 namespace MineSweeper.Pages.Components;
 
@@ -8,7 +9,7 @@ public class ComponentsOfRoundPage : ComponentsOfPageBase
     protected override void SetBodyComponents()
     {
         DisplayConfig();
-        RoundLogic logic = new RoundLogic(10);
+        IRoundLogic logic = new RoundLogic(10);
         logic.Generate();
     }
 

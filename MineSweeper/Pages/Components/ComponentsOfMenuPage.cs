@@ -1,4 +1,4 @@
-using MineSweeper.Logic.Buttons;
+using MineSweeper.Logic.Menu.Buttons;
 using MineSweeper.Interfaces;
 using MineSweeper.Abstracts;
 using MineSweeper.Logic;
@@ -7,7 +7,7 @@ namespace MineSweeper.Pages.Components;
 
 public class ComponentsOfMenuPage : ComponentsOfPageBase
 {
-    private MenuLogic _menuLogic = new MenuLogic();
+    private IMenuLogic _menuLogic = new MenuLogic();
     
     private Dictionary<string, IButton> _functions = new Dictionary<string, IButton>
     {

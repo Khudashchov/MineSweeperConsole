@@ -1,14 +1,14 @@
 using MineSweeper.Interfaces;
 using MineSweeper.Status;
 
-namespace MineSweeper.Logic.Buttons;
+namespace MineSweeper.Logic.Menu.Buttons;
 
 public class ExitButton : IButton
 {
     public void Action()
     {
-        Console.Clear();
-
         ProgramStatus.CloseProgram();
+
+        Console.Clear();
     }
 }

@@ -10,7 +10,8 @@ public class RoundLogic : IRoundLogic
 {
     private int _mineCount;
     private Field _field;
-    private Stack<(int, int)> _mines = new Stack<(int, int)>();
+    private Coordinates _currentCoordinates;
+    private readonly Queue<Coordinates> _mines = new Queue<Coordinates>();
     private Random _random = new Random();
     private TimerLogic _timer = new TimerLogic();
     private StatsLogic _statsLogic = new StatsLogic();
@@ -41,6 +42,7 @@ public class RoundLogic : IRoundLogic
                     DrawReport(Message.LossMessage);
                     break;
                 case GameState.Exit:
+                    ProgramStatus.DisableGame();
                     _timer.Stop();
                     break;
                 default:
@@ -49,16 +51,16 @@ public class RoundLogic : IRoundLogic
         }
     }
 
-    private Stack<(int, int)> GetMinePositions()
+    private Queue<Coordinates> GetMinePositions(int currentMines = 0)
     {
-        int currentMines = 0;
         while (currentMines < _mineCount)
         {
-            int top = _random.Next(0, _field.GetFieldHeight());
-            int left = _random.Next(0, _field.GetFieldWidth());
-            if (!_field.IsMine(top, left))
+            _currentCoordinates.Y = _random.Next(0, Field.FieldHeight);
+            _currentCoordinates.X = _random.Next(0, Field.FieldWidth);
+
+            if (!_mines.Contains(_currentCoordinates))
             {
-                _mines.Push((top, left));
+                _mines.Enqueue(_currentCoordinates);
                 currentMines++;
             }
         }

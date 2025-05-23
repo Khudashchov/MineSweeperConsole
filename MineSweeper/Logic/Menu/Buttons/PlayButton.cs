@@ -2,7 +2,7 @@ using MineSweeper.Interfaces;
 using MineSweeper.Pages;
 using MineSweeper.Status;
 
-namespace MineSweeper.Logic.Buttons;
+namespace MineSweeper.Logic.Menu.Buttons;
 
 public class PlayButton : IButton
 {
@@ -12,12 +12,13 @@ public class PlayButton : IButton
     {
         _round = new PageRound();
     }
-    
+
     public void Action()
     {
         ProgramStatus.EnableGame();
 
         _round.Generate();
-
+        
+        ProgramStatus.EnableMenu();
     }
 }

@@ -5,7 +5,6 @@ namespace MineSweeper.Logic;
 
 public class MenuLogic : IMenuLogic
 {
-    private int _cursorCentrePos = Console.WindowHeight / 2;
     private short _taskMaxValue;
     private short _taskValue;
     private short _task
@@ -28,12 +27,16 @@ public class MenuLogic : IMenuLogic
         }
     }
 
+    public MenuLogic()
+    {
+        ProgramStatus.EnableMenu();
+    }
 
     private void DrawTasks(Dictionary<string, IButton> functions, List<string> keys)
     {
         for (int i = 0; i < functions.Count; i++)
         {
-            Cursor.SetCursorCenter(_cursorCentrePos + (i * 3), Console.WindowWidth - 2, keys[i]);
+            Cursor.SetCursorCenter((Console.WindowHeight / 2) + (i * 3), Console.WindowWidth - 2, keys[i]);
 
             if (i == _task)
             {
@@ -52,9 +55,6 @@ public class MenuLogic : IMenuLogic
 
     public IButton SelectOption(Dictionary<string, IButton> functions)
     {
-        ProgramStatus.EnableMenu();
-        Console.CursorVisible = false;
-
         var keys = new List<string>(functions.Keys);
         _taskMaxValue = Convert.ToInt16(functions.Count - 1);
         _task = 0;

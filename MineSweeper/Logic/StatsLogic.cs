@@ -12,12 +12,17 @@ public class StatsLogic : IStatsLogic
 
     public StatsLogic()
     {
+        File.SetAttributes(StatsFilePath, FileAttributes.ReadOnly);
+
         _records = new List<StatsRecord>();
         _records = LoadStats();
+        _records = _records.OrderBy(r => r.Seconds).ToList();
     }
 
     private List<StatsRecord> LoadStats()
     {
+        File.SetAttributes(StatsFilePath, FileAttributes.Normal);
+
         if (File.Exists(StatsFilePath))
         {
             var lines = File.ReadAllLines(StatsFilePath);
@@ -31,7 +36,9 @@ public class StatsLogic : IStatsLogic
             }
         }
 
+        File.SetAttributes(StatsFilePath, FileAttributes.ReadOnly);
         return _records;
+
     }
 
     public List<StatsRecord> GetAllStats()
@@ -41,6 +48,8 @@ public class StatsLogic : IStatsLogic
 
     public void SaveRoundStats(StatsRecord newStat)
     {
+        File.SetAttributes(StatsFilePath, FileAttributes.Normal);
+
         _records.Add(newStat);
         _hasChanges = true;
 
@@ -56,11 +65,14 @@ public class StatsLogic : IStatsLogic
             SaveAllStats(_records);
             _hasChanges = false;
         }
+
+        File.SetAttributes(StatsFilePath, FileAttributes.ReadOnly);
+
     }
 
     private void SaveAllStats(List<StatsRecord> records)
     {
-        File.WriteAllText(StatsFilePath, string.Empty); 
+        File.WriteAllText(StatsFilePath, string.Empty);
 
         foreach (var record in records)
         {
