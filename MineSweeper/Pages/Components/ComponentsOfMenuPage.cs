@@ -7,8 +7,6 @@ namespace MineSweeper.Pages.Components;
 
 public class ComponentsOfMenuPage : ComponentsOfPageBase
 {
-    private IMenuLogic _menuLogic = new MenuLogic();
-    
     private Dictionary<string, IButton> _functions = new Dictionary<string, IButton>
     {
         {"PLAY", new PlayButton()},
@@ -17,6 +15,7 @@ public class ComponentsOfMenuPage : ComponentsOfPageBase
     };
     protected override void SetBodyComponents()
     {
-        _menuLogic.SelectOption(_functions).Action();
+        IMenuLogic menuLogic = new MenuLogic();
+        menuLogic.SelectOption(_functions).Action();
     }
 }

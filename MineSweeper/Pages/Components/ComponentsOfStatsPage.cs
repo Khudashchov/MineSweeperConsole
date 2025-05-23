@@ -9,8 +9,8 @@ public class ComponentsOfStatsPage : ComponentsOfPageBase
 {
     protected override void SetBodyComponents()
     {
-        IStatsLogic _statsLogic = new StatsLogic();
-        ShowStats(_statsLogic);
+        IStatsLogic statsLogic = new StatsLogic();
+        ShowStats(statsLogic);
     }
 
     private void ShowStats(IStatsLogic _statsLogic, int i = 0)

@@ -32,21 +32,26 @@ public class RoundLogic : IRoundLogic
         {
             GameState state = _field.MakeMove();
 
-            switch (state)
+            if (state != GameState.InGame)
             {
-                case GameState.Win:
-                    DrawReport(Message.WinMessage);
-                    SaveStat();
-                    break;
-                case GameState.Loss:
-                    DrawReport(Message.LossMessage);
-                    break;
-                case GameState.Exit:
-                    ProgramStatus.DisableGame();
-                    _timer.Stop();
-                    break;
-                default:
-                    continue;
+                StopGame();
+
+                switch (state)
+                {
+                    case GameState.Win:
+                        DrawReport(Message.WinMessage);
+                        SaveStat();
+                        break;
+                    case GameState.Loss:
+                        DrawReport(Message.LossMessage);
+                        break;
+                    case GameState.Exit:
+                        break;
+                }
+            }
+            else
+            {
+                continue;
             }
         }
     }
@@ -75,9 +80,7 @@ public class RoundLogic : IRoundLogic
     }
 
     private void DrawReport(string[] message)
-    {
-        ProgramStatus.DisableGame();
-        _timer.Stop();
+    {   
         Console.Clear();
 
         Message.DrawMessage(message);
@@ -89,9 +92,15 @@ public class RoundLogic : IRoundLogic
         
         Cursor.SetDefaultColor();
     }
+    
+    private void StopGame()
+    {
+        ProgramStatus.DisableGame();
+        _timer.Stop();
+    }
 
     private void SaveStat()
-    { 
+    {
         _currentStat = new StatsRecord(_timer.GetElapsedSeconds());
         _statsLogic.SaveRoundStats(_currentStat);
     }

@@ -1,5 +1,3 @@
-using MineSweeper.Status;
-
 namespace MineSweeper.Logic.Round;
 
 public class Field

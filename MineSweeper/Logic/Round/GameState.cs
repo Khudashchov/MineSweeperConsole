@@ -5,5 +5,5 @@ public enum GameState
     InGame,
     Win,
     Loss,
-    Exit
+    Exit 
 }
