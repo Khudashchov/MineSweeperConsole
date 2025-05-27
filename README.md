@@ -12,3 +12,6 @@
 
 **P.S.** If it doesn`t work, try to zoom in or zoom out.
 To use it press *CTRL* + *-* or *+*, btw you can use mouse wheel.
+
+## UPD
+Application adapted to other devices.

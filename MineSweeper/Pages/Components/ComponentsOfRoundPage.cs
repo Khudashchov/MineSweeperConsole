@@ -9,7 +9,7 @@ public class ComponentsOfRoundPage : ComponentsOfPageBase
     protected override void SetBodyComponents()
     {
         DisplayConfig();
-        IRoundLogic logic = new RoundLogic(10);
+        IRoundLogic logic = new RoundLogic(3);
         logic.Generate();
     }
 

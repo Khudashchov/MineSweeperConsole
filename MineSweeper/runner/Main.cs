@@ -4,9 +4,6 @@ using MineSweeper.Pages.Components;
 using MineSweeper.Status;
 
 #pragma warning disable CA1416
-// Console.SetWindowSize(170, 46);
-// Console.SetBufferSize(179, 47);
-
 Console.SetWindowSize(120, 25);
 Console.SetBufferSize(129, 26);
 #pragma warning restore CA1416

@@ -73,8 +73,7 @@ public class Field
 
     public void DrawCell(int top, int left)
     {
-        Console.SetCursorPosition(_startX, _startY);
-        Console.SetCursorPosition(Console.CursorLeft + left, Console.CursorTop + top);
+        Console.SetCursorPosition(_startX + left, _startY + top);
 
         if (_field[top, left].IsOpen())
         {
@@ -189,10 +188,8 @@ public class Field
         }
     }
 
-    private int CountMinesCube(int y, int x)
+    private int CountMinesCube(int y, int x, int currentMines = 0)
     {
-        int mines = 0;
-
         for (int i = y - 1; i < y + 2; i++)
         {
             for (int j = x - 1; j < x + 2; j++)
@@ -201,7 +198,7 @@ public class Field
                 {
                     if (_field[i, j].IsMine())
                     {
-                        mines++;
+                        currentMines++;
                     }
                     else
                     {
@@ -219,7 +216,7 @@ public class Field
             }
         }
 
-        return mines;
+        return currentMines;
     }
 
     private void Open()
